@@ -52,6 +52,17 @@ if (burger) {
   links.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => { links.style.display = ''; }));
 }
 
+// Depoimentos: ver mais / ver menos
+document.querySelectorAll('.depo__toggle').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const card = btn.closest('.depo__card');
+    const expanded = card.getAttribute('data-expanded') === 'true';
+    card.setAttribute('data-expanded', String(!expanded));
+    btn.setAttribute('aria-expanded', String(!expanded));
+    btn.firstChild.textContent = expanded ? 'Ver mais' : 'Ver menos';
+  });
+});
+
 // Smooth anchor offset for fixed nav
 document.querySelectorAll('a[href^="#"]').forEach((a) => {
   a.addEventListener('click', (ev) => {
