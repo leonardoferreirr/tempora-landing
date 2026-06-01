@@ -206,6 +206,92 @@ section { position: relative; }
 .pain h3 { font-size: 1.3rem; margin-bottom: .5rem; }
 .pain p { font-size: .96rem; color: var(--muted); }
 
+/* ---------- DTM + Bruxismo ---------- */
+.dtm { background: var(--paper); }
+.dtm__grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem;
+  align-items: stretch; margin-bottom: 5rem;
+}
+.dtm__symptoms {
+  background: var(--green-deep); color: rgba(255,255,255,.94);
+  border-radius: var(--radius-lg); padding: 2.8rem 2.6rem;
+  position: relative; box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.dtm__symptoms::after {
+  content: ""; position: absolute; top: -80px; right: -80px;
+  width: 240px; height: 240px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(199,168,117,.18), transparent 70%);
+  pointer-events: none;
+}
+.dtm__chip {
+  display: inline-block; background: rgba(199,168,117,.18);
+  color: var(--gold-light); font-family: var(--ff-body);
+  font-size: .74rem; font-weight: 600; letter-spacing: .22em;
+  text-transform: uppercase;
+  padding: .55rem 1.1rem; border-radius: 100px; margin-bottom: 1.8rem;
+  border: 1px solid rgba(199,168,117,.32);
+}
+.dtm__symptoms ul { list-style: none; display: grid; gap: 1rem; position: relative; z-index: 2; }
+.dtm__symptoms li {
+  display: flex; gap: .9rem; align-items: flex-start;
+  font-size: 1.04rem; line-height: 1.5; color: rgba(255,255,255,.92);
+}
+.dtm__symptoms li::before {
+  content: ""; width: 8px; height: 8px; flex-shrink: 0;
+  background: var(--gold); border-radius: 50%; margin-top: 9px;
+}
+.dtm__media {
+  position: relative; border-radius: var(--radius-lg); overflow: hidden;
+  box-shadow: var(--shadow-md); min-height: 380px;
+}
+.dtm__media img {
+  width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;
+}
+.dtm__caption {
+  position: absolute; left: 1.2rem; bottom: 1.2rem; right: 1.2rem;
+  background: rgba(22,41,31,.78); backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(199,168,117,.22);
+  border-radius: 16px; padding: 1rem 1.2rem; color: #fff;
+}
+.dtm__caption strong { font-family: var(--ff-display); font-size: 1.1rem; display: block; color: var(--gold-light); }
+.dtm__caption span { font-size: .88rem; color: rgba(255,255,255,.82); }
+
+/* Bruxismo */
+.bruxismo { margin-top: 4.5rem; }
+.bruxismo__head { max-width: 42rem; margin-bottom: 2.4rem; }
+.bruxismo__head h3 { font-size: clamp(1.85rem, 4vw, 2.6rem); margin: .8rem 0 .8rem; }
+.bruxismo__head p { color: var(--muted); font-size: 1.05rem; }
+.bruxismo__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+.bruxo__card {
+  background: var(--white);
+  border: 1px solid rgba(33,61,49,.08);
+  border-radius: var(--radius); padding: 2.2rem 2rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform .5s var(--ease), box-shadow .5s var(--ease), border-color .4s;
+  position: relative;
+}
+.bruxo__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(199,168,117,.4);
+}
+.bruxo__tag {
+  display: inline-block; font-family: var(--ff-body);
+  font-size: .74rem; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--gold-deep); background: rgba(199,168,117,.14);
+  padding: .42rem .9rem; border-radius: 100px;
+  margin-bottom: 1.3rem;
+}
+.bruxo__card h4 {
+  font-family: var(--ff-display); font-size: 1.4rem;
+  color: var(--green); margin-bottom: .8rem; line-height: 1.2;
+  font-weight: 400;
+}
+.bruxo__card p { color: var(--muted); font-size: .98rem; line-height: 1.55; }
+
 /* ---------- Mosaic ---------- */
 .mosaic { background: var(--paper); }
 .mosaic__grid {
@@ -318,6 +404,9 @@ section { position: relative; }
   .about__grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .services__grid, .steps__grid { grid-template-columns: 1fr 1fr; }
   .footer__grid { grid-template-columns: 1fr 1fr; }
+  .dtm__grid { grid-template-columns: 1fr; }
+  .dtm__media { min-height: 320px; aspect-ratio: 4/5; }
+  .bruxismo__grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 680px) {
   .nav__links { display: none; }
