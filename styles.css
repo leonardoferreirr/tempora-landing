@@ -354,10 +354,53 @@ section { position: relative; }
 
 /* ---------- Depoimentos ---------- */
 .depo { background: var(--paper); }
-.depo__grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem;
-  align-items: start;
+
+/* Carrossel estilo Netflix: 1 card centralizado, pedacinho dos vizinhos */
+.depo__carousel { position: relative; max-width: 1180px; margin: 0 auto; padding: 0 64px; }
+.depo__viewport { overflow: hidden; padding: .8rem 0 1.4rem; }
+.depo__track {
+  display: flex;
+  gap: 1.6rem;
+  transition: transform .55s cubic-bezier(.4,.0,.2,1);
+  will-change: transform;
 }
+.depo__track .depo__card {
+  flex: 0 0 78%;
+  scroll-snap-align: center;
+  transition: transform .55s cubic-bezier(.4,.0,.2,1), opacity .55s, filter .55s;
+  opacity: .6; transform: scale(.95);
+}
+.depo__track .depo__card.is-active { opacity: 1; transform: scale(1); }
+.depo__nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--white); border: 1px solid rgba(33,61,49,.12);
+  color: var(--green);
+  display: grid; place-items: center;
+  cursor: pointer; box-shadow: var(--shadow-md);
+  transition: transform .3s, box-shadow .3s, background .3s;
+  z-index: 5;
+}
+.depo__nav svg { width: 22px; height: 22px; }
+.depo__nav:hover { transform: translateY(-50%) scale(1.06); box-shadow: var(--shadow-lg); background: var(--gold); color: var(--green-deep); }
+.depo__nav.prev { left: 4px; }
+.depo__nav.next { right: 4px; }
+.depo__nav[disabled] { opacity: .35; cursor: not-allowed; transform: translateY(-50%); }
+.depo__dots { display: flex; justify-content: center; gap: .55rem; margin-top: 1.2rem; }
+.depo__dots button {
+  width: 28px; height: 4px; border-radius: 4px;
+  background: rgba(33,61,49,.18); border: none; padding: 0;
+  cursor: pointer; transition: background .3s, width .3s;
+}
+.depo__dots button.is-active { background: var(--gold); width: 44px; }
+@media (max-width: 780px) {
+  .depo__carousel { padding: 0 12px; }
+  .depo__track .depo__card { flex: 0 0 88%; }
+  .depo__nav { width: 42px; height: 42px; }
+  .depo__nav.prev { left: -6px; }
+  .depo__nav.next { right: -6px; }
+}
+
 .depo__card {
   background: var(--white);
   border: 1px solid rgba(33,61,49,.08);

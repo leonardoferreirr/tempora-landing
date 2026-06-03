@@ -290,7 +290,14 @@
       <h2 class="display">O que dizem <span class="italic">os pacientes</span></h2>
       <p>Histórias reais de quem voltou a viver sem dor depois do tratamento na Têmpora.</p>
     </div>
-    <div class="depo__grid">
+    <div class="depo__carousel" id="depoCarousel">
+      <button class="depo__nav prev" type="button" aria-label="Depoimento anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m15 6-6 6 6 6"/></svg>
+      </button>
+      <button class="depo__nav next" type="button" aria-label="Próximo depoimento">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 6 6 6-6 6"/></svg>
+      </button>
+      <div class="depo__viewport"><div class="depo__track">
 
       <article class="depo__card depo--long reveal" data-d="1" data-expanded="false">
         <svg class="depo__quote" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.3 6C4.4 6 2 8.4 2 11.3v6.7h7.3v-7.3H6.7C6.7 9 7.9 7.7 9.3 7.7V6H7.3zm10 0c-2.9 0-5.3 2.4-5.3 5.3v6.7h7.3v-7.3h-2.7c0-1.7 1.2-3 2.7-3V6h-2z"/></svg>
@@ -341,6 +348,8 @@
         </div>
       </article>
 
+      </div></div>
+      <div class="depo__dots" aria-label="Indicadores de depoimento"></div>
     </div>
   </div>
 </section>

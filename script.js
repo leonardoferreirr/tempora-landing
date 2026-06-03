@@ -77,3 +77,66 @@ document.querySelectorAll('a[href^="#"]').forEach((a) => {
     }
   });
 });
+
+// ========== Carrossel Depoimentos (Netflix-style) ==========
+(function(){
+  const root = document.getElementById('depoCarousel');
+  if (!root) return;
+  const track = root.querySelector('.depo__track');
+  const cards = [...track.querySelectorAll('.depo__card')];
+  const prev = root.querySelector('.depo__nav.prev');
+  const next = root.querySelector('.depo__nav.next');
+  const dotsWrap = root.querySelector('.depo__dots');
+  if (cards.length === 0) return;
+
+  // dots
+  cards.forEach((_, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Ir para depoimento ' + (i+1));
+    b.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(b);
+  });
+  const dots = [...dotsWrap.querySelectorAll('button')];
+
+  let idx = 0;
+  const layout = () => {
+    const card = cards[idx];
+    if (!card) return;
+    const viewportW = root.querySelector('.depo__viewport').getBoundingClientRect().width;
+    const cardW = card.getBoundingClientRect().width;
+    const gap = parseFloat(getComputedStyle(track).gap) || 0;
+    // center the active card within the viewport
+    const offset = card.offsetLeft - (viewportW - cardW) / 2;
+    track.style.transform = `translateX(${-offset}px)`;
+    cards.forEach((c, i) => c.classList.toggle('is-active', i === idx));
+    dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+    prev.toggleAttribute('disabled', idx === 0);
+    next.toggleAttribute('disabled', idx === cards.length - 1);
+  };
+  const goTo = (i) => { idx = Math.max(0, Math.min(cards.length - 1, i)); layout(); };
+
+  prev.addEventListener('click', () => goTo(idx - 1));
+  next.addEventListener('click', () => goTo(idx + 1));
+
+  // swipe
+  let startX = 0, dragging = false;
+  track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; dragging = true; }, {passive:true});
+  track.addEventListener('touchend', (e) => {
+    if (!dragging) return; dragging = false;
+    const dx = (e.changedTouches[0].clientX - startX);
+    if (Math.abs(dx) > 50) goTo(dx < 0 ? idx + 1 : idx - 1);
+  }, {passive:true});
+
+  // keyboard
+  root.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); goTo(idx + 1); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(idx - 1); }
+  });
+  root.setAttribute('tabindex', '0');
+
+  // initial + on resize
+  requestAnimationFrame(layout);
+  let resizeT;
+  window.addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(layout, 80); });
+})();
